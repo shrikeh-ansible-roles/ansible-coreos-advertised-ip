@@ -1,0 +1,5 @@
+---
+coreos_advertised_ip_env_file: /etc/environment
+coreos_advertised_ipv4_env_key: COREOS_PUBLIC_IPV4
+coreos_advertised_ipv6_env_key: COREOS_PUBLIC_IPV6
+...

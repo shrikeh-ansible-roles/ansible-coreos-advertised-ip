@@ -1,0 +1,13 @@
+---
+- name: Get the advertised IPv6 from the environment file
+  shell: |
+    echo $(awk -F= '/{{ coreos_advertised_ipv6_env_key }}/ {print $2}' {{ coreos_advertised_ip_env_file }})
+  register: coreos_kubernetes_advertised_ipv6_awk
+
+- name: Set the IPv6 advertised IP for the host as a fact
+  set_fact:
+    coreos_kubernetes_advertised_ipv6: "{{ coreos_kubernetes_advertised_ipv6_awk.stdout | ipv6 }}"
+
+- debug:
+    msg: "coreos_kubernetes_advertised_ipv6 set to '{{ coreos_kubernetes_advertised_ipv6 }}'"
+...

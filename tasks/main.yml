@@ -1,0 +1,9 @@
+---
+- name: Resolve the public IPv4 address if we need to.
+  include: ipv4.yml
+  when: coreos_kubernetes_advertised_ipv4 is not defined
+
+- name: Resolve the public IPv6 address if we need to.
+  include: ipv6.yml
+  when: coreos_kubernetes_advertised_ipv6 is not defined
+...

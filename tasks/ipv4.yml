@@ -1,0 +1,13 @@
+---
+- name: Get the advertised IPv4 from the environment file
+  shell: |
+    echo $(awk -F= '/{{ coreos_advertised_ipv4_env_key }}/ {print $2}' {{ coreos_advertised_ip_env_file }})
+  register: coreos_kubernetes_advertised_ipv4_awk
+
+- name: Set the IPv4 advertised IP for the host as a fact
+  set_fact:
+    coreos_kubernetes_advertised_ipv4: "{{ coreos_kubernetes_advertised_ipv4_awk.stdout | ipv4 }}"
+
+- debug:
+    msg: "coreos_kubernetes_advertised_ipv4 set to '{{ coreos_kubernetes_advertised_ipv4 }}'"
+...
